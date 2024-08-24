@@ -6,4 +6,5 @@ class User < ApplicationRecord
   has_many :adverts
   has_many :favourites
   has_many :reviews
+  has_one_attached :profile_picture
 end

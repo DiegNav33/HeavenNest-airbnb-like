@@ -5,4 +5,5 @@ class Advert < ApplicationRecord
   has_many :reviews
   has_many :advert_amenities, dependent: :destroy
   has_many :amenities, through: :advert_amenities
+  has_many_attached :images
 end
