@@ -1,0 +1,39 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  price: 1
+  max_guests: 1
+  min_nights: 1
+  bedrooms: 1
+  beds: 1
+  bathrooms: 1
+  check_in: 2024-08-24 12:19:53
+  check_out: 2024-08-24 12:19:53
+  house_rules: MyText
+  address: MyString
+  city: MyString
+  state: MyString
+  postal_code: MyString
+  country: MyString
+  category: one
+
+two:
+  title: MyString
+  description: MyText
+  price: 1
+  max_guests: 1
+  min_nights: 1
+  bedrooms: 1
+  beds: 1
+  bathrooms: 1
+  check_in: 2024-08-24 12:19:53
+  check_out: 2024-08-24 12:19:53
+  house_rules: MyText
+  address: MyString
+  city: MyString
+  state: MyString
+  postal_code: MyString
+  country: MyString
+  category: two
