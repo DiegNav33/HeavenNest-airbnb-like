@@ -1,0 +1,10 @@
+.userButton {
+  text-decoration: none;
+  border-radius: 2rem;
+  padding: 1rem 1.5rem;
+  border: 1px solid lightgray;
+
+  &:hover {
+    border: 1px solid lightgray;
+  }
+}

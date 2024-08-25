@@ -1,0 +1,15 @@
+#categoriesNav {
+  border-top: .5px solid lightgray;
+  padding: 1rem 0;
+  overflow-x: auto; /* Permet le défilement horizontal */
+
+  span {
+    font-weight: bold;
+    color: gray;
+    transition: .5s;
+
+    &:hover {
+      color: #198753;
+    }
+  }
+}
