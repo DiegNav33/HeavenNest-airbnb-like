@@ -1,4 +1,42 @@
 <div class="container">
-  <%= link_to "Sign-Out", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline-danger btn-lg ms-3" %>
+  <h1 class="text-center mt-5">Information about <%= @user.first_name %></h1>
+  <div class="d-flex justify-content-center mt-5">
+    <div class="card position-relative" id="cardProfile" style="width: 400px;">
+      <div class="card-body d-flex align-items-center justify-content-evenly">
+        <!-- Affichage de la photo de profil -->
+        <div class="my-4">
+          <%= image_tag(@user.profile_picture.present? ? @user.profile_picture : "logo.png",
+                        alt: "Profile Picture",
+                        class: "rounded-circle imgProfile") %>
+          <div class="text-center mt-2">
+            <h2><em><%= @user.first_name %></em></h2>
+            <% if @user.adverts.blank? %>
+              <h5>Traveller</h5>
+            <% else %>
+              <h5>Traveller / Host</h5>
+            <% end %>
+          </div>
+        </div>
+        <div id="lineY"></div>
+        <div>
+          <div>
+            <p class="m-0"><%= @user.reviews.count %></p>
+            <h4>Reviews</h4>
+          </div>
+          <hr>
+          <div>
+            <p class="m-0"><%= @user.adverts.count %></p>
+            <h4>Adverts</h4>
+          </div>
+        </div>
+      </div>
+        <% if @user == current_user %>
+          <%= link_to edit_user_registration_path, class: "btn btn-outline-success position-absolute", id:"editButton" do %>
+            <i class="fa-solid fa-pencil"></i>
+          <% end %>
 
+          <%= link_to "Sign-Out", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline-danger btn-sm position-absolute", id:"logoutButton" %>
+        <% end %>
+    </div>
+  </div>
 </div>
