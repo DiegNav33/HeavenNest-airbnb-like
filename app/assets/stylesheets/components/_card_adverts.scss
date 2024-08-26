@@ -1,0 +1,56 @@
+.cardAdverts {
+  transition: .5s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 2rem;
+
+  &:hover {
+    transform: translateY(-10px);
+    border: 1px solid #198753;
+
+    .detailsAdvert {
+
+      p {
+        border: 1px solid #198753;
+      }
+    }
+
+    #priceAdvert {
+      color: #198753;
+    }
+
+    #hostName {
+      color: #198753;
+    }
+  }
+
+  .card-header {
+    border-radius: 2rem 2rem 0 0;
+  }
+
+  .card-footer {
+    border-radius: 0 0 2rem 2rem;
+  }
+
+  #hostName {
+    font-size: 1.2rem;
+    color: gray;
+    transition: .5s;
+  }
+
+  #priceAdvert {
+    color: gray;
+    font-weight: bold;
+    transition: .5s;
+  }
+
+  .detailsAdvert {
+
+    p {
+      border: 1px solid gray;
+      border-radius: 5rem;
+      padding: .5rem 1.5rem;
+      transition: .5s;
+    }
+
+  }
+}

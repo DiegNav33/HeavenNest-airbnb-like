@@ -2,7 +2,6 @@ class AdvertsController < ApplicationController
   # skip_before_action :authenticate_user!, only: %i[index show new]
 
   def index
-
     if params[:query].present?
       query = params[:query]
       @adverts = Advert.where("city ILIKE :query OR state ILIKE :query OR country ILIKE :query", query: "%#{query}%")

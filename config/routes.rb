@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   root "adverts#index"
 
   resources :adverts
+  resources :profiles, path: 'users/profile'
 end

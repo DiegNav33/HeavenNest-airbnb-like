@@ -12,18 +12,18 @@
           <li class="nav-item">
             <%= form_with(url: adverts_path, method: :get, local: true, class: 'd-flex align-items-center position-relative me-3') do |f| %>
               <%= f.label :query, class: 'visually-hidden' %>
-              <%= f.text_field :query, placeholder: "Search by city, state or country...", class: "form-control", id: "inputSearch" %>
+              <%= f.text_field :query, placeholder: "Search by city, state or country...", value: params[:query], class: "form-control", id: "inputSearch" %>
               <button type="submit" class="btn" id="iconSearch">
-                <i class="fas fa-search"></i> <!-- Icône loupe -->
+                <i class="fas fa-search"></i>
               </button>
             <% end %>
           </li>
           <% if user_signed_in? %>
-          <li class="nav-item">
-            <%= link_to "New advert", new_advert_path, class: "btn btn-outline-success btn-lg me-3" %>
-          </li>
             <li class="nav-item">
-              <%= link_to "Profile", root_path, class: "btn btn-outline-success btn-lg" %>
+              <%= link_to "New advert", new_advert_path, class: "btn btn-outline-success btn-lg me-3" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Profile", profile_path(current_user), class: "btn btn-outline-success btn-lg" %>
             </li>
           <% else %>
             <li class="nav-item">
@@ -40,9 +40,24 @@
       <div class="container">
         <div class="row">
           <div class="col-12">
-            <%= form_with(url: adverts_path, method: :get, local: true, class: 'd-flex align-items-center justify-content-center') do %>
+            <%= form_with(url: adverts_path, method: :get, local: true, class: 'd-flex align-items-center justify-content-evenly') do %>
               <% Category.all.each do |category| %>
-                <button type="submit" name="category" value="<%= category.id %>" class="btn me-2">
+                <% active_class = params[:category].to_i == category.id ? 'active' : '' %>
+                <button type="submit" name="category" value="<%= category.id %>" class="btn d-flex flex-column align-items-center justify-content-center categoriesButton <%= active_class %> ">
+                  <% icon_class = case category.name
+                    when 'Apartment' then 'building'
+                    when 'House' then 'house'
+                    when 'Room' then 'bed'
+                    when 'Bungalow' then 'caravan'
+                    when 'Chalet' then 'tree'
+                    when 'Mansion' then 'house-chimney-crack'
+                    when 'Unusual' then 'igloo'
+                    when 'Villa' then 'house-flood-water'
+                    when 'Studio' then 'city'
+                    when 'Farm' then 'cow'
+                    else 'question'
+                  end %>
+                  <i class="fa-solid fa-<%= icon_class %>"></i>
                   <span><%= category.name %></span>
                 </button>
               <% end %>
