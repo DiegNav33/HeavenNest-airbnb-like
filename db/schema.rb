@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_24_144700) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_27_084749) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -82,6 +82,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_24_144700) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "bookings", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "advert_id", null: false
+    t.date "start_date"
+    t.date "end_date"
+    t.decimal "total_price", precision: 10, scale: 2, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["advert_id"], name: "index_bookings_on_advert_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
+
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -136,6 +148,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_24_144700) do
   add_foreign_key "advert_amenities", "amenities"
   add_foreign_key "adverts", "categories"
   add_foreign_key "adverts", "users"
+  add_foreign_key "bookings", "adverts"
+  add_foreign_key "bookings", "users"
   add_foreign_key "favourites", "adverts"
   add_foreign_key "favourites", "users"
   add_foreign_key "reviews", "adverts"

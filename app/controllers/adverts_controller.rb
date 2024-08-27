@@ -16,17 +16,42 @@ class AdvertsController < ApplicationController
   end
 
   def new
+    @user = current_user
+    @advert = Advert.new(user_id: @user.id)
   end
 
   def create
+    @user = current_user
+    @advert = @user.adverts.build(advert_params)
+    if @advert.save
+      redirect_to advert_path(@advert), notice: "Advert successfully created", status: :see_other
+    else
+      render :new, status: :unprocessable_entity
+    end
+
+  end
+
+  def show
+    @advert = Advert.find(params[:id])
   end
 
   def edit
+    @advert = Advert.find(params[:id])
   end
 
   def update
+    @advert = Advert.find(params[:id])
   end
 
   def destroy
+    @advert = Advert.find(params[:id])
+    @advert.destroy
+    redirect_to root_path, notice: "Advert successfully deleted", status: :see_other
+  end
+
+  private
+
+  def advert_params
+    params.require(:advert).permit(:title, :description, :price, :max_guests, :min_nights, :bedrooms, :beds, :bathrooms, :check_in, :check_out, :house_rules, :address, :city, :state, :postal_code, :country, :category_id, :amenity_ids)
   end
 end

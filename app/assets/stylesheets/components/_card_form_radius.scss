@@ -1,0 +1,8 @@
+.cardFormRadius {
+  border-radius: 2rem;
+  transition: .5s;
+
+  &:hover {
+    border: 1px solid #198753;
+  }
+}
