@@ -9,4 +9,7 @@ class User < ApplicationRecord
   has_many :bookings # Association pour les réservations effectuées par l'utilisateur
   has_many :reserved_adverts, through: :bookings, source: :advert # Annonces réservées par l'utilisateur
   has_one_attached :profile_picture
+
+  validates :first_name, presence: true
+  validates :last_name, presence: true
 end

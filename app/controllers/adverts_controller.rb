@@ -41,6 +41,11 @@ class AdvertsController < ApplicationController
 
   def update
     @advert = Advert.find(params[:id])
+    if @advert.update(advert_params)
+      redirect_to advert_path(@advert), notice: "Advert successfully created", status: :see_other
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
@@ -52,6 +57,6 @@ class AdvertsController < ApplicationController
   private
 
   def advert_params
-    params.require(:advert).permit(:title, :description, :price, :max_guests, :min_nights, :bedrooms, :beds, :bathrooms, :check_in, :check_out, :house_rules, :address, :city, :state, :postal_code, :country, :category_id, :amenity_ids)
+    params.require(:advert).permit(:title, :description, :price, :max_guests, :min_nights, :bedrooms, :beds, :bathrooms, :check_in, :check_out, :house_rules, :address, :city, :state, :postal_code, :country, :category_id, amenity_ids: [], images: [])
   end
 end

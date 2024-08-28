@@ -10,7 +10,12 @@
             <div class="card shadow-sm mt-5 cardAdverts" style="height: 400px;">
               <!-- Card Header with Poster URL -->
               <div class="card-header p-0" style="height: 50%; overflow: hidden;">
-                <%= image_tag "test.jpg", alt: "alttext", style: "height: 100%; width:100%; object-fit: cover;" %>
+
+                <% if advert.images.present? %>
+                  <%= image_tag advert.images.sample, alt: "alttext", style: "height: 100%; width:100%; object-fit: cover;" %>
+                <% else %>
+                  <%= image_tag "test.jpg", alt: "alttext", style: "height: 100%; width:100%; object-fit: cover;" %>
+                <% end %>
               </div>
 
               <!-- Card Body with Title, Rating, and Overview -->

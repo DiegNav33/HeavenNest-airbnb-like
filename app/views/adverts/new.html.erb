@@ -11,18 +11,18 @@
           <%= f.input :state, label: "State/Region", placeholder: "Florida...", input_html: { class: 'form-control' } %>
           <%= f.input :postal_code, placeholder: "33301...", input_html: { class: 'form-control' } %>
           <%= f.input :country, as: :country, prompt: "Select your country...", input_html: { class: 'form-control' } %>
-          <%= f.input :max_guests, input_html: { class: 'form-control' } %>
-          <%= f.input :min_nights, input_html: { class: 'form-control' } %>
-          <%= f.input :bedrooms, input_html: { class: 'form-control' } %>
-          <%= f.input :beds, input_html: { class: 'form-control' } %>
-          <%= f.input :bathrooms, input_html: { class: 'form-control' } %>
-          <%= f.input :amenity_ids, label: "Amenities", as: :check_boxes, collection: Amenity.all, label_method: :name, value_method: :id %>
+          <%= f.input :max_guests, input_html: { class: 'form-control', min: 1 } %>
+          <%= f.input :min_nights, input_html: { class: 'form-control', min: 1 } %>
+          <%= f.input :bedrooms, input_html: { class: 'form-control', min: 1 } %>
+          <%= f.input :beds, input_html: { class: 'form-control', min: 1 } %>
+          <%= f.input :bathrooms, input_html: { class: 'form-control', min: 1 } %>
+          <%= f.input :amenity_ids, label: "Amenities", as: :check_boxes, collection: Amenity.all, label_method: :name, value_method: :id, input_html: { class: 'form-control' } %>
           <%= f.input :check_in, placeholder: "Gorgeous house in beachfront...", input_html: { class: 'form-control' } %>
           <%= f.input :check_out, placeholder: "Gorgeous house in beachfront...", input_html: { class: 'form-control' } %>
-          <%= f.input :price, input_html: { class: 'form-control' } %>
+          <%= f.input :price, input_html: { class: 'form-control', min: 1 } %>
           <%= f.input :house_rules, placeholder: "eg: no smoking, no parties...", input_html: { class: 'form-control' } %>
           <%= f.input :description, placeholder: "Gorgeous house in beachfront...", input_html: { class: 'form-control' } %>
-          <%= f.input :images, as: :file, input_html: { multiple: true } %>
+          <%= f.input :images, as: :file, input_html: { class: 'form-control', multiple: true } %>
           <div class="form-actions text-center">
             <%= f.button :submit, class: "btn btn-success btn-lg" %>
           </div>
