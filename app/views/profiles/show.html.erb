@@ -56,7 +56,11 @@
               <div class="card shadow-sm mt-5 me-3 cardAdverts cardProfile position-relative" style="height: 400px;">
                 <!-- Card Header with Poster URL -->
                 <div class="card-header p-0" style="height: 50%; overflow: hidden;">
-                  <%= image_tag "test.jpg", alt: "alttext", style: "height: 100%; width:100%; object-fit: cover;" %>
+                  <% if advert.images.present? %>
+                    <%= image_tag advert.images.first, alt: "alttext", style: "height: 100%; width:100%; object-fit: cover;" %>
+                  <% else %>
+                    <%= image_tag "test.jpg", alt: "alttext", style: "height: 100%; width:100%; object-fit: cover;" %>
+                  <% end %>
                 </div>
 
                 <!-- Card Body with Title, Rating, and Overview -->
@@ -99,7 +103,11 @@
               <div class="card shadow-sm mt-5 me-3 cardAdverts cardProfile position-relative" style="height: 400px;">
                 <!-- Card Header with Poster URL -->
                 <div class="card-header p-0" style="height: 50%; overflow: hidden;">
-                  <%= image_tag "test.jpg", alt: "alttext", style: "height: 100%; width:100%; object-fit: cover;" %>
+                  <% if advert.images.present? %>
+                    <%= image_tag advert.images.first, alt: "alttext", style: "height: 100%; width:100%; object-fit: cover;" %>
+                  <% else %>
+                    <%= image_tag "test.jpg", alt: "alttext", style: "height: 100%; width:100%; object-fit: cover;" %>
+                  <% end %>
                 </div>
 
                 <!-- Card Body with Title, Rating, and Overview -->
@@ -117,7 +125,14 @@
                 <!-- Card Footer with Price -->
                 <div class="card-footer d-flex justify-content-between align-items-center" style="height: 15%;">
                   <p class="mb-0" id="priceAdvert">€ <%= advert.price %> / night</p>
-                  <p class="mb-0" id="hostName"><i class="fa-solid fa-user me-2"></i><%= advert.user.first_name %></p>
+                  <div class="d-flex align-items-center">
+                  <% if advert.user.profile_picture.present? %>
+                    <%= image_tag advert.user.profile_picture, alt: "Profile Picture" %>
+                  <% else %>
+                    <%= image_tag "logo.png", alt: "Profile Picture" %>
+                  <% end %>
+                  <p class="mb-0 ms-1" id="hostName"><%= advert.user.first_name %></p>
+                </div>
                 </div>
               </div>
             <% end %>

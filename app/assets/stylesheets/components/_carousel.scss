@@ -1,0 +1,52 @@
+.carouselContainer {
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+
+  @media (min-width: 768px) {
+    border-radius: 2rem;
+    margin-top: 3rem;
+
+    #carouselImage {
+      height: 550px;
+      object-fit: cover;
+    }
+  }
+
+  @media (max-width: 767px) {
+    height: 200px;
+
+    #carouselImage {
+      height: 200px;
+      object-fit: contain;
+    }
+  }
+}
+
+
+.controlIconContainer {
+  background: rgba(50, 50, 50, 1);
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 1px solid #333;
+
+  .fa-solid {
+    font-size: 2rem;
+  }
+}
+
+.carousel-inner {
+
+  @media (min-width: 768px) {
+    border-radius: 2rem 0 0 2rem;
+  }
+}
+
+.smallImagesContainer {
+  height: 550px;
+  overflow: auto;
+
+  & > div {
+    cursor: pointer;
+  }
+}

@@ -29,6 +29,12 @@
 
   .card-footer {
     border-radius: 0 0 2rem 2rem;
+
+    img {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+    }
   }
 
   #hostName {

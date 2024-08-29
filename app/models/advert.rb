@@ -10,7 +10,7 @@ class Advert < ApplicationRecord
   has_many_attached :images
 
   validates :title, presence: true, length: { maximum: 70}
-  validates :description, presence: true, length: { maximum: 200}
+  validates :description, presence: true, length: { maximum: 350}
   validates :price, :max_guests, :min_nights, :bedrooms, :beds, :bathrooms, presence: true, numericality: { greater_than_or_equal_to: 1 }
   validates :check_in, :check_out, :house_rules, :address, :city, :state, :postal_code, :country, :category_id, presence: true
   validate :validate_amenities_count
@@ -26,14 +26,14 @@ class Advert < ApplicationRecord
   end
 
   def at_least_one_image
-    if images.blank? || images.size < 1
-      errors.add(:images, "must have at least one image")
+    if images.blank? || images.size < 3
+      errors.add(:images, "must have at least three images")
     end
   end
 
   def validate_images_count
-    if images.size > 5
-      errors.add(:images, "You can upload a maximum of 5 images")
+    if images.size > 8
+      errors.add(:images, "You can upload a maximum of 8 images")
     end
   end
 end
