@@ -6,3 +6,9 @@ header {
   // backdrop-filter: blur(8px); /* Effet de flou */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre pour distinction */
 }
+
+@media (max-width: 767px) {
+  .hide-header-mobile {
+    display: none; /* Cache le header */
+  }
+}

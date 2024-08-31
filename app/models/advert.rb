@@ -32,8 +32,8 @@ class Advert < ApplicationRecord
   end
 
   def validate_images_count
-    if images.size > 8
-      errors.add(:images, "You can upload a maximum of 8 images")
+    if images.size > 10
+      errors.add(:images, "You can upload a maximum of 10 images")
     end
   end
 end

@@ -32,6 +32,7 @@ gem "simple_form"
 gem "sassc-rails"
 gem "devise"
 gem 'country_select'
+gem 'wicked'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"

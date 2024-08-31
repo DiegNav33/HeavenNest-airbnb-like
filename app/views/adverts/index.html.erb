@@ -6,7 +6,7 @@
       <% @adverts.each do |advert| %>
         <div class="col-12 col-md-6 col-lg-4 mb-0">
           <!-- Card component wrapped in link_to -->
-          <%= link_to advert_path(advert), class: "text-decoration-none" do %>
+          <%= link_to advert_path(advert), class: "text-decoration-none", target: "_blank" do %>
             <div class="card shadow-sm mt-5 cardAdverts" style="height: 400px;">
               <!-- Card Header with Poster URL -->
               <div class="card-header p-0" style="height: 50%; overflow: hidden;">

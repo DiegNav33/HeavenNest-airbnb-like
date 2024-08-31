@@ -20,13 +20,17 @@
         <div id="lineY"></div>
         <div>
           <div>
-            <p class="m-0"><%= @user.bookings.count %></p>
-            <h4>Bookings</h4>
+            <p class="m-0"><%= @user.adverts.count %></p>
+            <h4>Adverts</h4>
           </div>
           <hr>
           <div>
-            <p class="m-0"><%= @user.adverts.count %></p>
-            <h4>Adverts</h4>
+            <% time_ago = distance_of_time_in_words_to_now(@user.created_at) %>
+            <% time_parts = time_ago.split(' ') %>
+            <% number = time_parts[0] %>
+            <% unit = time_parts[1] %>
+            <p class="m-0"><%= number %></p>
+            <h4><%= unit %> registered </h4>
           </div>
         </div>
       </div>

@@ -1,0 +1,125 @@
+.advertShow {
+
+  hr {
+    margin: 2rem 0;
+  }
+
+  .star-yellow {
+    color: rgb(199, 199, 43);
+  }
+
+  .detailsAdvert {
+
+    .text-muted {
+      font-size: 1rem;
+    }
+
+    .hostDetails {
+
+      img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+      }
+
+      #hostAddress {
+        font-size: 1.2rem;
+        color: gray;
+      }
+    }
+
+    .advertDescription, .advertAmenities, .advertRules {
+      height: 100px;
+      overflow: scroll;
+      margin-top: 2rem;
+
+      p {
+        margin: 0;
+      }
+
+      li {
+        width: 50%;
+        margin-bottom: 1rem;
+
+        &:last-child, &:nth-last-child(2) {
+          margin: 0;
+        }
+      }
+
+      @media (min-width: 767px) {
+        height: 80px;
+      }
+    }
+
+    .advertRules {
+      height: auto;
+      p {
+        width: 50%;
+        margin-bottom: 1rem;
+
+        &:last-child, &:nth-last-child(2) {
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  .bottomAdvert {
+
+    .map {
+      height: 200px;
+      overflow: hidden;
+
+      img {
+        margin-top: 2rem;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      @media (min-width: 767px) {
+        height: 400px;
+      }
+    }
+
+    .reviewsPicture {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+    }
+
+    #deleteButton {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+    }
+  }
+
+  .detailsPrice {
+
+    .card {
+      border: 1px solid #198753;
+      border-radius: 2rem;
+    }
+  }
+
+  .sticky-bottom {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #f8f9fa; /* Couleur de fond pour le bloc sticky */
+    padding: 1rem; /* Ajoute du padding pour le confort */
+    z-index: 999; /* Assure-toi que le z-index est supérieur à celui des autres éléments */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ajoute une ombre pour le style */
+  }
+
+  .card {
+    border-radius: 2rem;
+
+    @media (min-width: 992px) {
+      padding: 2rem;
+    }
+  }
+}

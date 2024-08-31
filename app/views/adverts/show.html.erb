@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container advertShow">
   <div class="row carouselContainer">
     <!-- Colonne gauche : Carousel -->
     <div class="col-lg-8 p-0">
@@ -49,5 +49,160 @@
         <% end %>
       </div>
     </div>
+  </div>
+
+  <div class="row">
+    <!-- Colonne pour les détails de l'annonce -->
+    <div class="col-md-8">
+      <article class="detailsAdvert mt-5">
+        <div>
+          <h1><%= @advert.title %></h1>
+          <h3><%= @advert.city %>, <%= @advert.state %>, <%= @advert.country %></h3>
+          <p class="m-0"><%= pluralize(@advert.max_guests, 'traveller') %> | <%= pluralize(@advert.bedrooms, 'bedroom') %> | <%= pluralize(@advert.beds, 'bed') %> | <%= pluralize(@advert.bathrooms, 'bathroom') %> </p>
+          <div class="d-flex">
+            <p class="m-0"><%= pluralize(@advert.reviews.count, 'review') %></p>
+            <p class="m-0">
+            <% if @average_rating > 0 %>
+              <span class="ms-2"> |
+                <% @average_rating.to_i.times do %>
+                  <i class="fas fa-star star-yellow"></i>
+                <% end %>
+                <span class="text-muted">(Avg. <%= @average_rating.round(1) %> stars)</span>
+              </span>
+            <% end %>
+          </p>
+          </div>
+        </div>
+        <hr>
+        <div class="d-flex align-items-center hostDetails">
+          <%= link_to profile_path(@advert.user), target: "_blank" do %>
+            <%= image_tag @advert.user.profile_picture.present? ? @advert.user.profile_picture : "logo.png" %>
+          <% end %>
+          <div class="ms-4 hostDetailsContact">
+            <p class="m-0">Host: <%= @advert.user.first_name %> <%= @advert.user.last_name %></p>
+            <% if @advert.user.city.present? && @advert.user.country.present?  %>
+              <p class="m-0" id="hostAddress">Lives in <%= @advert.user.city %>, <%= @advert.user.country %></p>
+            <% end %>
+          </div>
+        </div>
+        <hr>
+        <div>
+          <h2 class="borderHeadersProfile">About the place</h2>
+          <div class="advertDescription">
+            <%= simple_format(@advert.description) %>
+          </div>
+        </div>
+        <hr>
+        <div>
+          <h2 class="borderHeadersProfile">What this place offers (<%= @advert.amenities.count %>)</h2>
+          <div class="advertAmenities">
+            <ul class="d-flex flex-wrap justify-content-between p-0 list-unstyled">
+              <% @advert.amenities.each do |amenity| %>
+                <li><%= amenity.name %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+        <hr>
+        <div>
+          <h2 class="borderHeadersProfile">Things to know</h2>
+          <div class="advertRules">
+            <div class="d-flex flex-wrap justify-content-between">
+              <p class="m-0">Check-in: <%= @advert.check_in.strftime("%H:%M") %></p>
+              <p class="m-0">Check-out: <%= @advert.check_out.strftime("%H:%M") %></p>
+              <p class="m-0"> <%= pluralize( @advert.min_nights, "night") %> minimum</p>
+              <p class="m-0"> <%= pluralize( @advert.max_guests, "guest") %> maximum</p>
+            </div>
+          </div>
+        </div>
+        <hr>
+      </article>
+    </div>
+     <!-- Colonne pour le prix, nombre de nuits, et le bouton Réserver -->
+    <div class="col-md-4 pe-0">
+      <div class="sticky-top d-md-block d-none mt-5 z-0 detailsPrice" style="top: 100px;">
+        <div class="card shadow-sm p-5">
+          <h3 class="">€ <%= @advert.price %> / night</h3>
+          <%= link_to "Reserve", new_advert_booking_path(@advert), class: "btn btn-success btn-lg mt-3 p-3" %>
+        </div>
+      </div>
+    </div>
+    <!-- Bloc sticky pour mobile (visible sur sm et inférieurs) -->
+    <div class="d-md-none p-0">
+      <div class="col-12">
+        <div class="sticky-bottom bg-light p-3 text-center shadow d-flex align-items-center justify-content-between">
+          <h3 class="mb-2">€ <%= @advert.price %> / night</h3>
+          <%= link_to "Reserve", new_advert_booking_path(@advert), class: "btn btn-success btn-lg btn-block" %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <article class="bottomAdvert">
+      <div>
+        <h2 class="borderHeadersProfile">Where you'll be</h2>
+        <div class="map">
+          <p class="mb-0 mt-2"><%= @advert.city %>, <%= @advert.state %>, <%= @advert.country %></p>
+          <div>
+            <%= image_tag "map.png" %>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div>
+        <h2 class="borderHeadersProfile">What travellers say</h2>
+        <div class="row d-flex justify-content-end mt-4">
+          <div class="col-md-6">
+            <% if @advert.reviews.blank? %>
+                <h4 class="mt-5 text-center">Be the first to review this place!</h4>
+            <% else %>
+              <div class="review-container mt-2" style="max-height: 200px; overflow-y: auto;">
+                <% @advert.reviews.each do |review| %>
+                  <% if review.valid? %>
+                    <div class="mt-0 pt-2 position-relative review-item">
+                      <% review.rating.times do %>
+                        <i class="fas fa-star star-yellow"></i>
+                      <% end %>
+                      <small>
+                        <em class="text-muted">
+                        <%= distance_of_time_in_words_to_now(review.created_at) %> ago
+                        </em>
+                      </small>
+                      <p class="pe-4 mb-0 mt-1"><%= review.content %></p>
+                      <p><small>by <%= review.user.first_name %> <%= review.user.last_name  %>
+                        <%= link_to profile_path(review.user), target: "_blank" do %>
+                          <%= image_tag(review.user.profile_picture.present? ? review.user.profile_picture : "logo.png", alt: "Profile Picture", class: "reviewsPicture") %>
+                        <% end %>
+                      </small></p>
+                      <% if review.user == current_user %>
+                        <%= link_to review_path(review), data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to delete it?"}, class: "btn  text-danger", id: "deleteButton" do %>
+                        <i class="fa-solid fa-trash"></i>
+                        <% end %>
+                      <% end %>
+                      <hr class="mb-0">
+                    </div>
+                  <% else %>
+                    <h4 class="mt-5 text-center">Be the first to add a review!</h4>
+                  <% end %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+          <div class="col-md-6" id="review-form">
+            <article class="card shadow-sm mt-3 mb-5">
+              <div class="card-body">
+                <h4 class="text-center mb-4">Add a Review</h4>
+                <%= simple_form_for [@advert, @review] do |f| %>
+                  <%= f.input :content, placeholder: 'Add your comment...', label: false, input_html: { class: 'form-control mt-3' } %>
+                  <%= f.input :rating, as: :select, collection: 1..5, prompt: 'Rate the list (max:5)', label: false, input_html: { class: 'form-control mt-3' } %>
+                  <%= f.submit "Add Review", class: 'btn btn-outline-success btn-block mt-3' %>
+                <% end %>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
   </div>
 </div>
