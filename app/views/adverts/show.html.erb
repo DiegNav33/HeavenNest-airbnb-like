@@ -59,16 +59,20 @@
           <h1><%= @advert.title %></h1>
           <h3><%= @advert.city %>, <%= @advert.state %>, <%= @advert.country %></h3>
           <p class="m-0"><%= pluralize(@advert.max_guests, 'traveller') %> | <%= pluralize(@advert.bedrooms, 'bedroom') %> | <%= pluralize(@advert.beds, 'bed') %> | <%= pluralize(@advert.bathrooms, 'bathroom') %> </p>
+          <p class="m-0">Category: <%= @advert.category.name %></p>
           <div class="d-flex">
             <p class="m-0"><%= pluralize(@advert.reviews.count, 'review') %></p>
             <p class="m-0">
-            <% if @average_rating > 0 %>
-              <span class="ms-2"> |
-                <% @average_rating.to_i.times do %>
-                  <i class="fas fa-star star-yellow"></i>
-                <% end %>
-                <span class="text-muted">(Avg. <%= @average_rating.round(1) %> stars)</span>
-              </span>
+
+            <% if @advert.reviews.any? && @average_rating.present? %>
+              <% if @average_rating > 0 %>
+                <span class="ms-2"> |
+                  <% @average_rating.to_i.times do %>
+                    <i class="fas fa-star star-yellow"></i>
+                  <% end %>
+                  <span class="text-muted">(Avg. <%= @average_rating.round(1) %> stars)</span>
+                </span>
+              <% end %>
             <% end %>
           </p>
           </div>

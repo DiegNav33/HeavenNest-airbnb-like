@@ -2,7 +2,7 @@ class Booking < ApplicationRecord
   belongs_to :user
   belongs_to :advert
 
-  validates :start_date, :end_date, :total_price, presence: true
+  validates :start_date, :end_date, :total_guests, :total_price, presence: true
   validate :end_date_after_start_date
 
   before_save :calculate_total_price

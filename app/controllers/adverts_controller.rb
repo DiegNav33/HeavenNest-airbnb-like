@@ -34,7 +34,12 @@ class AdvertsController < ApplicationController
   def show
     @advert = Advert.find(params[:id])
     @review = Review.new(advert_id: @advert)
-    @average_rating = @advert.reviews.average(:rating).to_f
+    @reviews = @advert.reviews
+    if @reviews.any?
+      @average_rating = @reviews.average(:rating).to_f
+    else
+      @average_rating = nil
+    end
   end
 
   def edit
