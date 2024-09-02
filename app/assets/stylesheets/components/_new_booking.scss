@@ -16,4 +16,15 @@
       object-fit: cover;
     }
   }
+
+  #price-summary {
+    opacity: 0;
+    transform: translateX(-300px); /* Déplace la carte vers le haut au départ */
+    transition: opacity .5s ease-in-out, transform .5s ease-in-out;
+  }
+
+  #price-summary.show {
+    opacity: 1;
+    transform: translateX(0); /* Réinitialise le déplacement vertical */
+  }
 }

@@ -1,45 +1,53 @@
 <div class="container newBooking">
-  <h2 class="borderHeadersProfile mt-5">Few clicks from your dream</h2>
-  <div class="d-flex justify-content-center my-5">
-    <div class="card cardFormRadius" style="width: 500px;">
-      <div class="card-header d-flex align-items-center">
-        <div id="imageAdvertBooking" class="me-3">
-          <%= image_tag @advert.images.first %>
+  <%= simple_form_for [@advert, @booking], html: { data: { controller: 'booking', booking_price: @advert.price } } do |f| %>
+    <div>
+      <h2 class="borderHeadersProfile mt-5">Few clicks from your dream</h2>
+      <div class="d-flex justify-content-center my-5">
+        <div class="card cardFormRadius" style="width: 500px;">
+          <div class="card-header d-flex align-items-center">
+            <div id="imageAdvertBooking" class="me-3">
+              <%= image_tag @advert.images.first %>
+            </div>
+            <div>
+              <h3 class="card-title m-0"><%= @advert.title %></h3>
+              <h4 class="m-0"><%= @advert.city %>, <%= @advert.state %>, <%= @advert.country %></h4>
+              <p class="m-0"><%= @advert.category.name %></p>
+              <p class="m-0"><%= @advert.price %> / night</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="mb-3">
+              <%= f.input :start_date, as: :string, label: "Check-in", input_html: { data: { controller: "datepicker", booking_target:"startDate" } } %>
+            </div>
+            <div class="mb-3">
+              <%= f.input :end_date, as: :string, label: "Check-out", input_html: { data: { controller: "datepicker", booking_target:"endDate" } } %>
+            </div>
+            <div class="mb-3">
+              <%= f.input :total_guests, label: "Guests", collection: 1..@advert.max_guests, prompt: "Select a number", input_html: { data: { booking_target: 'totalGuests' } } %>
+            </div>
+            <div class="form-actions text-center">
+              <%= f.button :button, "Continue", class: "btn btn-outline-success btn-lg mt-3", data: { action: "click->booking#checkDate" } %>
+            </div>
+            <div id="error-messages" class="text-danger mt-3" data-booking-target="errorMessages"></div>
+          </div>
         </div>
-        <div>
-          <h3 class="card-title m-0"><%= @advert.title %></h3>
-          <h4 class="m-0"><%= @advert.city %>, <%= @advert.state %>, <%= @advert.country %></h4>
-          <p class="m-0"><%= @advert.category.name %></p>
-          <p class="m-0"><%= @advert.price %> / night</p>
-        </div>
-      </div>
-      <div class="card-body">
-        <%= simple_form_for [@advert, @booking], html: { data: { controller: 'booking', booking_price: @advert.price } } do |f| %>
-          <!-- Première carte: Inputs pour les dates et bouton Continuer -->
-          <div class="mb-3">
-            <%= f.input :start_date, as: :string, label: "Check-in", input_html: { data: { controller: "datepicker", booking_target:"startDate" } } %>
-          </div>
-          <div class="mb-3">
-            <%= f.input :end_date, as: :string, label: "Check-out", input_html: { data: { controller: "datepicker", booking_target:"endDate" } } %>
-          </div>
-          <div class="mb-3">
-            <%= f.input :total_guests, label: "Guests", collection: 1..@advert.max_guests, prompt: "Select a number", input_html: { data: { booking_target: 'totalGuests' } } %>
-          </div>
-          <div class="form-actions text-center">
-            <%= f.button :button, "Continue", class: "btn btn-outline-success btn-lg mt-3", data: { action: "click->booking#checkDate" } %>
-          </div>
-          <div id="error-messages" class="text-danger mt-3" data-booking-target="errorMessages"></div>
-
-          <!-- Deuxième carte: Résumé de réservation (initialement cachée) -->
-          <div id="price-summary" class="d-none" data-booking-target="summary">
-            <h3 class="text-center">Confirm and pay</h3>
-            <p id="nights-count" data-booking-target="nightsCount"></p>
-            <p id="period" data-booking-target="period"></p>
-            <p id="total-price" data-booking-target="totalPrice"></p>
-            <%= f.submit 'Confirm Booking', class: "btn btn-success btn-block mt-3" %>
-          </div>
-        <% end %>
       </div>
     </div>
-  </div>
+    <div id="price-summary" data-booking-target="summary">
+      <h2 class="borderHeadersProfile mt-5">Confirmation and booking</h2>
+      <div class="d-flex justify-content-center my-5">
+        <div class="card cardFormRadius" style="width: 500px;">
+          <div class="card-body">
+            <p id="nights-count" data-booking-target="nightsCount"></p>
+            <p id="guestsCount" data-booking-target="guestsCount"></p>
+            <p id="period" data-booking-target="period"></p>
+            <p id="total-price" data-booking-target="totalPrice"></p>
+            <div class="form-actions text-center">
+              <%= f.submit 'Confirm Booking', class: "btn btn-success btn-lg mt-3" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>

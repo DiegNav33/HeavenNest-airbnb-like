@@ -1,11 +1,10 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["startDate", "endDate", "totalGuests", "summary", "nightsCount", "period", "totalPrice", "errorMessages"]
+  static targets = ["startDate", "endDate", "totalGuests", "summary", "nightsCount", "period", "guestsCount", "totalPrice", "errorMessages"]
 
   checkDate(event) {
     event.preventDefault();
-    console.log("ok");
 
     let checkIn = this.startDateTarget.value;
     let checkOut = this.endDateTarget.value;
@@ -25,26 +24,28 @@ export default class extends Controller {
 
     this.errorMessagesTarget.textContent = ""
 
-    // Calculer le nombre de nuits
+    // Calculate the nbre of nights
     const millisecondsPerDay = 1000 * 60 * 60 * 24;
     const differenceInMilliseconds = objDateCheckOut - objDateCheckIn;
     const nights = Math.ceil(differenceInMilliseconds / millisecondsPerDay);
 
-    // Calculer le prix total
+    // Calculate total price
     const pricePerNight = parseFloat(this.element.dataset.bookingPrice);
     const totalPrice = nights * pricePerNight;
 
-    // Formater les dates
+    // Get dates
     const options = { month: 'long', day: 'numeric', year: 'numeric' };
     const startDateString = objDateCheckIn.toLocaleDateString('en-US', options);
     const endDateString = objDateCheckOut.toLocaleDateString('en-US', options);
 
     this.nightsCountTarget.textContent = `${nights} night(s)`;
+    this.guestsCountTarget.textContent = `${guests} guest(s)`
     this.periodTarget.textContent = `From: ${startDateString} to ${endDateString}`;
     this.totalPriceTarget.textContent = `Total: € ${totalPrice.toFixed(2)}`;
 
 
-    this.summaryTarget.classList.remove("d-none");
+    // this.summaryTarget.classList.remove("d-none");
+    this.summaryTarget.classList.add("show");
 
   }
 }

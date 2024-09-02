@@ -127,7 +127,12 @@
       <div class="sticky-top d-md-block d-none mt-5 z-0 detailsPrice" style="top: 100px;">
         <div class="card shadow-sm p-5">
           <h3 class="">€ <%= @advert.price %> / night</h3>
-          <%= link_to "Reserve", new_advert_booking_path(@advert), class: "btn btn-success btn-lg mt-3 p-3" %>
+
+          <% if current_user == @advert.user %>
+            <%= link_to "Edit", edit_advert_path(@advert), class: "btn btn-success btn-lg mt-3 p-3" %>
+          <% else %>
+            <%= link_to "Reserve", new_advert_booking_path(@advert), class: "btn btn-success btn-lg mt-3 p-3" %>
+          <% end %>
         </div>
       </div>
     </div>
