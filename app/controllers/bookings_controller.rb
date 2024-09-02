@@ -8,6 +8,7 @@ class BookingsController < ApplicationController
   def create
     @advert = Advert.find(params[:advert_id])
     @booking = @advert.bookings.new(booking_params)
+    @booking.user = current_user
     if @booking.save
       redirect_to profile_path(current_user), status: :see_other
     else
@@ -21,6 +22,6 @@ class BookingsController < ApplicationController
   private
 
   def booking_params
-    params.require(:booking).permit(:start_date, :end_date, :total_price)
+    params.require(:booking).permit(:start_date, :end_date, :total_guests)
   end
 end

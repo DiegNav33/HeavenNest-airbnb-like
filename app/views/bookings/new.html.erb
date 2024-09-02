@@ -14,21 +14,21 @@
         </div>
       </div>
       <div class="card-body">
-        <%= simple_form_for [@advert, @booking], html: { data: { controller: 'booking' } } do |f| %>
+        <%= simple_form_for [@advert, @booking], html: { data: { controller: 'booking', booking_price: @advert.price } } do |f| %>
           <!-- Première carte: Inputs pour les dates et bouton Continuer -->
           <div class="mb-3">
-            <%= f.input :start_date, as: :date, label: "Check-in", input_html: { data: { booking_target: 'startDate' } } %>
+            <%= f.input :start_date, as: :string, label: "Check-in", input_html: { data: { controller: "datepicker", booking_target:"startDate" } } %>
           </div>
           <div class="mb-3">
-            <%= f.input :end_date, as: :date, label: "Check-out", input_html: { data: { booking_target: 'endDate' } } %>
+            <%= f.input :end_date, as: :string, label: "Check-out", input_html: { data: { controller: "datepicker", booking_target:"endDate" } } %>
           </div>
           <div class="mb-3">
-            <%= f.input :total_guests, label: "Guests", collection: 1..@advert.max_guests, prompt: "Select a number",  input_html: { data: { booking_target: 'TotalGuests' } } %>
+            <%= f.input :total_guests, label: "Guests", collection: 1..@advert.max_guests, prompt: "Select a number", input_html: { data: { booking_target: 'totalGuests' } } %>
           </div>
           <div class="form-actions text-center">
-            <%= f.button :button, "Continue", class: "btn btn-primary btn-lg mt-3", data: { action: "click->booking#continue" } %>
+            <%= f.button :button, "Continue", class: "btn btn-outline-success btn-lg mt-3", data: { action: "click->booking#checkDate" } %>
           </div>
-          <div id="error-messages" class="text-danger mt-3"></div>
+          <div id="error-messages" class="text-danger mt-3" data-booking-target="errorMessages"></div>
 
           <!-- Deuxième carte: Résumé de réservation (initialement cachée) -->
           <div id="price-summary" class="d-none" data-booking-target="summary">
