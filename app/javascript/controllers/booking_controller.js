@@ -12,13 +12,25 @@ export default class extends Controller {
     let objDateCheckIn = new Date(checkIn);
     let objDateCheckOut = new Date(checkOut);
 
+     // Get today's date
+     let today = new Date();
+     today.setHours(0, 0, 0, 0);  // Set time to 00:00:00 to avoid issues with time comparisons
+
     if (checkIn === "" || checkOut === "" || guests === "") {
-      this.errorMessagesTarget.textContent = "Please fill in all the fields"
+      this.errorMessagesTarget.textContent = "Please fill in all the fields";
+      this.summaryTarget.classList.remove("show");
       return
     }
 
+    if (objDateCheckIn < today) {
+      this.errorMessagesTarget.textContent = "Check-in date cannot be in the past";
+      this.summaryTarget.classList.remove("show");
+      return;
+    }
+
     if (checkOut < checkIn || checkOut === checkIn) {
-      this.errorMessagesTarget.textContent = "Check-out must be after check-in"
+      this.errorMessagesTarget.textContent = "Check-out must be after check-in";
+      this.summaryTarget.classList.remove("show");
       return
     }
 
@@ -44,8 +56,11 @@ export default class extends Controller {
     this.totalPriceTarget.textContent = `Total: € ${totalPrice.toFixed(2)}`;
 
 
-    // this.summaryTarget.classList.remove("d-none");
     this.summaryTarget.classList.add("show");
+
+    if (this.errorMessagesTarget.textContent !== "") {
+      this.summaryTarget.classList.remove("show");
+    }
 
   }
 }

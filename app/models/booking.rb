@@ -7,6 +7,10 @@ class Booking < ApplicationRecord
 
   before_save :calculate_total_price
 
+  def nights_count
+    (end_date - start_date).to_i
+  end
+
 
   private
 

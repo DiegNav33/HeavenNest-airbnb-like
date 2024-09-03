@@ -89,7 +89,7 @@
                     <%= link_to edit_advert_path(advert), class: "btn btn-outline-success", id:"editButton" do %>
                       <i class="fa-solid fa-pencil"></i>
                     <% end %>
-                    <%= link_to advert_path(advert), data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to delete it #{advert.user.first_name}?"}, class: "btn btn-outline-danger", id:"editButton" do %>
+                    <%= button_to advert_path(advert), method: :delete, form_class: 'delete-alertbox', class: "btn btn-outline-danger", id:"editButton" do %>
                       <i class="fa-solid fa-trash-can"></i>
                     <% end %>
                   </div>
@@ -147,9 +147,54 @@
     <% else %>
       <p class="text-center mt-4"><strong><%= @user.first_name %> has not post any adverts yet.</strong></p>
   <% end %>
-  <hr class="my-5">
-  <h2 class="borderHeadersProfile"><%= @user.first_name %>'s bookings (<%= @user.bookings.count %>)</h2>
-  <% if @user.bookings.blank? %>
-    <p class="text-center mt-4"><strong><%= @user.first_name %> has not made any bookings yet.</strong></p>
+  <% if @user == current_user %>
+    <hr class="my-5">
+    <h2 class="borderHeadersProfile"><%= @user.first_name %>'s bookings (<%= @user.bookings.count %>)</h2>
+    <% if @user.bookings.blank? %>
+      <p class="text-center mt-4"><strong><%= @user.first_name %> has not made any bookings yet.</strong></p>
+    <% else %>
+      <div class="d-flex justify-content-between" id="containerListingProfile">
+        <% @user.bookings.each do |booking| %>
+            <div class="col-12 col-md-6 col-lg-4 mb-0">
+              <!-- Card component wrapped in link_to -->
+              <div class="card shadow-sm mt-5 me-3 cardAdverts cardProfile position-relative" style="height: 400px;">
+                <!-- Card Header with Poster URL -->
+                <div class="card-header p-0" style="height: 50%; overflow: hidden;">
+                  <% if booking.advert.images.present? %>
+                    <%= image_tag booking.advert.images.first, alt: "alttext", style: "height: 100%; width:100%; object-fit: cover;" %>
+                  <% else %>
+                    <%= image_tag "test.jpg", alt: "alttext", style: "height: 100%; width:100%; object-fit: cover;" %>
+                  <% end %>
+                </div>
+
+                <!-- Card Body with Title, Rating, and Overview -->
+                <div class="card-body position-relative" style="height: 35%; overflow: auto;">
+                  <h4 class="card-title m-0 mb-1"><strong><%= booking.advert.title %></strong></h4>
+                  <p class="m-0"><em><%= booking.advert.city %>, <%= booking.advert.country %></em></p>
+                  <div class="d-flex flex-wrap align-items-center justify-content-evenly mt-4 detailsAdvert">
+                    <p class="mb-0"><i class="fa-solid fa-users me-3"></i><%= booking.advert.max_guests %></p>
+                    <p class="mb-0"><i class="fa-solid fa-moon me-3"></i><%= booking.advert.min_nights %></p>
+                    <p class="mb-0"><i class="fa-solid fa-bed me-3"></i><%= booking.advert.bedrooms %></p>
+                    <p class="mb-0"><i class="fa-solid fa-bath me-3"></i><%= booking.advert.bathrooms %></p>
+                  </div>
+                </div>
+
+                <!-- Card Footer with Price -->
+                <div class="card-footer d-flex justify-content-between align-items-center" style="height: 15%;">
+                  <p class="mb-0" id="priceAdvert">€ <%= number_with_precision(booking.total_price, precision: (booking.total_price % 1 == 0 ? 0 : 2)) %> / <%= pluralize(booking.nights_count, "night")%></p>
+                  <div>
+                    <%= link_to advert_path(booking.advert), class: "btn btn-outline-success", id:"editButton" do %>
+                      <i class="fa-solid fa-eye"></i>
+                    <% end %>
+                    <%= button_to booking_path(booking), method: :delete, form_class: 'delete-alertbox', class: "btn btn-outline-danger", id:"editButton" do %>
+                      <i class="fa-solid fa-trash-can"></i>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
 </div>

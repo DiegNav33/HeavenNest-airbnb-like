@@ -184,7 +184,7 @@
                         <% end %>
                       </small></p>
                       <% if review.user == current_user %>
-                        <%= link_to review_path(review), data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to delete it?"}, class: "btn  text-danger", id: "deleteButton" do %>
+                        <%= button_to review_path(review), method: :delete, form_class: 'delete-alertbox', class: "btn  text-danger", id: "deleteButton" do %>
                         <i class="fa-solid fa-trash"></i>
                         <% end %>
                       <% end %>
