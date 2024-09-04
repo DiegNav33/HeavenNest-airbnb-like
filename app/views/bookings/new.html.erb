@@ -26,7 +26,7 @@
               <%= f.input :total_guests, label: "Guests", collection: 1..@advert.max_guests, prompt: "Select a number", input_html: { data: { booking_target: 'totalGuests' } } %>
             </div>
             <div class="form-actions text-center">
-              <%= f.button :button, "Continue", class: "btn btn-outline-success btn-lg mt-3", data: { action: "click->booking#checkDate" } %>
+              <%= f.button :button, "Continue", class: "btn btn-outline-success btn-lg mt-5", data: { action: "click->booking#checkDate" } %>
             </div>
             <div id="error-messages" class="text-danger mt-3" data-booking-target="errorMessages"></div>
           </div>
@@ -38,12 +38,31 @@
       <div class="d-flex justify-content-center my-5">
         <div class="card cardFormRadius" style="width: 500px;">
           <div class="card-body">
-            <p id="nights-count" data-booking-target="nightsCount"></p>
-            <p id="guestsCount" data-booking-target="guestsCount"></p>
-            <p id="period" data-booking-target="period"></p>
-            <p id="total-price" data-booking-target="totalPrice"></p>
+            <div class="d-flex align-items-center">
+              <i class="fa-solid fa-moon me-2"></i>
+              <p class="m-0" id="nights-count" data-booking-target="nightsCount"></p>
+            </div>
+            <hr>
+            <div class="d-flex align-items-center">
+              <i class="fa-solid fa-arrow-right-to-bracket me-2"></i>
+              <p class="m-0" id="checkInConfirm" data-booking-target="checkInConfirm"></p>
+            </div>
+            <hr>
+            <div class="d-flex align-items-center">
+              <i class="fa-solid fa-arrow-right-from-bracket me-2"></i>
+              <p class="m-0" id="checkOutConfirm" data-booking-target="checkOutConfirm"></p>
+            </div>
+            <hr>
+            <div class="d-flex align-items-center">
+              <i class="fa-solid fa-users me-2"></i>
+              <p class="m-0" id="guestsCount" data-booking-target="guestsCount"></p>
+            </div>
+            <hr>
+            <div class="d-flex align-items-center">
+              <strong id="total-price" data-booking-target="totalPrice"></strong>
+            </div>
             <div class="form-actions text-center">
-              <%= f.submit 'Confirm Booking', class: "btn btn-success btn-lg mt-3" %>
+              <%= f.submit 'Confirm Booking', class: "btn btn-success btn-lg mt-5" %>
             </div>
           </div>
         </div>

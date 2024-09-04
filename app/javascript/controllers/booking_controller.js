@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["startDate", "endDate", "totalGuests", "summary", "nightsCount", "period", "guestsCount", "totalPrice", "errorMessages"]
+  static targets = ["startDate", "endDate", "totalGuests", "summary", "nightsCount", "checkInConfirm", "checkOutConfirm", "period", "guestsCount", "totalPrice", "errorMessages"]
 
   checkDate(event) {
     event.preventDefault();
@@ -50,10 +50,11 @@ export default class extends Controller {
     const startDateString = objDateCheckIn.toLocaleDateString('en-US', options);
     const endDateString = objDateCheckOut.toLocaleDateString('en-US', options);
 
-    this.nightsCountTarget.textContent = `${nights} night(s)`;
-    this.guestsCountTarget.textContent = `${guests} guest(s)`
-    this.periodTarget.textContent = `From: ${startDateString} to ${endDateString}`;
-    this.totalPriceTarget.textContent = `Total: € ${totalPrice.toFixed(2)}`;
+    this.nightsCountTarget.textContent = `${nights} ${nights === 1 ? 'night' : 'nights'}`;
+    this.guestsCountTarget.textContent = `${guests} ${guests === 1 ? 'guest' : 'guests'}`;
+    this.checkInConfirmTarget.textContent = startDateString;
+    this.checkOutConfirmTarget.textContent = endDateString;
+    this.totalPriceTarget.textContent = `Total: € ${totalPrice}`;
 
 
     this.summaryTarget.classList.add("show");

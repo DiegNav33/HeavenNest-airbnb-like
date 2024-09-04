@@ -53,7 +53,7 @@
   <h2 class="borderHeadersProfile" ><%= @user.first_name %>'s listings (<%= @user.adverts.count %>)</h2>
   <% if @user.adverts.present? %>
     <% if @user == current_user %>
-      <div class="d-flex justify-content-between" id="containerListingProfile">
+      <div class="d-flex justify-content-<%=@user.adverts.count <= 2 ? 'start' : 'between'%>" id="containerListingProfile">
         <% @user.adverts.each do |advert| %>
           <div class="col-12 col-md-6 col-lg-4 mb-0">
             <!-- Card component wrapped in link_to -->
@@ -99,7 +99,7 @@
         <% end %>
       </div>
     <% else %>
-      <div class="d-flex justify-content-between" id="containerListingProfile">
+      <div class="d-flex justify-content-<%=@user.adverts.count <= 2 ? 'start' : 'between'%>" id="containerListingProfile">
         <% @user.adverts.each do |advert| %>
           <div class="col-12 col-md-6 col-lg-4 mb-0">
             <!-- Card component wrapped in link_to -->
@@ -153,7 +153,7 @@
     <% if @user.bookings.blank? %>
       <p class="text-center mt-4"><strong><%= @user.first_name %> has not made any bookings yet.</strong></p>
     <% else %>
-      <div class="d-flex justify-content-between" id="containerListingProfile">
+      <div class="d-flex justify-content-<%=@user.adverts.count <= 2 ? 'start' : 'between'%>" id="containerListingProfile">
         <% @user.bookings.each do |booking| %>
             <div class="col-12 col-md-6 col-lg-4 mb-0">
               <!-- Card component wrapped in link_to -->
@@ -169,7 +169,7 @@
 
                 <!-- Card Body with Title, Rating, and Overview -->
                 <div class="card-body position-relative" style="height: 35%; overflow: auto;">
-                  <h4 class="card-title m-0 mb-1"><strong><%= booking.advert.title %></strong></h4>
+                  <h4 class="card-title m-0 mb-1"><strong><%= booking.start_date.strftime("%d/%m/%y") %> - <%= booking.end_date.strftime("%d/%m/%y") %></strong></h4>
                   <p class="m-0"><em><%= booking.advert.city %>, <%= booking.advert.country %></em></p>
                   <div class="d-flex flex-wrap align-items-center justify-content-evenly mt-4 detailsAdvert">
                     <p class="mb-0"><i class="fa-solid fa-users me-3"></i><%= booking.advert.max_guests %></p>
@@ -186,8 +186,17 @@
                     <%= link_to advert_path(booking.advert), class: "btn btn-outline-success", id:"editButton" do %>
                       <i class="fa-solid fa-eye"></i>
                     <% end %>
-                    <%= button_to booking_path(booking), method: :delete, form_class: 'delete-alertbox', class: "btn btn-outline-danger", id:"editButton" do %>
-                      <i class="fa-solid fa-trash-can"></i>
+
+                    <% if booking.start_date >= Date.today %>
+                      <%= button_to booking_path(booking), method: :delete, form_class: 'delete-alertbox', class: "btn btn-outline-danger", id:"editButton" do %>
+                        <i class="fa-solid fa-trash-can"></i>
+                      <% end %>
+                    <% elsif booking.start_date <= Date.today && booking.end_date >= Date.today %>
+                      <i class="fa-solid fa-spinner"></i>
+                    <% else %>
+                      <%= link_to "#{advert_path(booking.advert)}#review-form", class: "text-decoration-none" do %>
+                        <i class="fa-solid fa-comment-medical"></i>
+                      <% end %>
                     <% end %>
                   </div>
                 </div>
