@@ -18,19 +18,27 @@
   }
 
   #price-summary {
-    opacity: 0;
-    transform: translateX(-300px); /* Déplace la carte vers le haut au départ */
-    transition: opacity .5s ease-in-out, transform .5s ease-in-out;
+    display: none;
+    // opacity: 0;
+    // transform: translateX(-500px); /* Déplace la carte vers le haut au départ */
+    // transition: opacity .5s ease-in-out, transform .5s ease-in-out;
   }
 
   #price-summary.show {
-    opacity: 1;
-    transform: translateX(0); /* Réinitialise le déplacement vertical */
+    display: block;
+    // opacity: 1;
+    // transform: translateX(0); /* Réinitialise le déplacement vertical */
   }
 
   @media (min-width: 768px) {
     .card, .price-summary.card {
       padding: 1rem;
+    }
+  }
+
+  @media (max-width: 767px) {
+    #new_booking {
+      margin-top: 5rem;
     }
   }
 }

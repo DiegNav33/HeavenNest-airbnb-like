@@ -187,12 +187,14 @@
                       <i class="fa-solid fa-eye"></i>
                     <% end %>
 
-                    <% if booking.start_date >= Date.today %>
+                    <% if booking.start_date > Date.today %>
                       <%= button_to booking_path(booking), method: :delete, form_class: 'delete-alertbox', class: "btn btn-outline-danger", id:"editButton" do %>
                         <i class="fa-solid fa-trash-can"></i>
                       <% end %>
                     <% elsif booking.start_date <= Date.today && booking.end_date >= Date.today %>
-                      <i class="fa-solid fa-spinner"></i>
+                      <div class="btn btn-outline-secondary" data-bs-toggle="tooltip" title="Your stay has started, enjoy! (<%= booking.start_date.strftime("%d/%m/%y") %> - <%= booking.end_date.strftime("%d/%m/%y") %>)">
+                        <i class="fa-solid fa-spinner spin"></i>
+                      </div>
                     <% else %>
                       <%= link_to "#{advert_path(booking.advert)}#review-form", class: "text-decoration-none" do %>
                         <i class="fa-solid fa-comment-medical"></i>

@@ -139,9 +139,11 @@
     <!-- Bloc sticky pour mobile (visible sur sm et inférieurs) -->
     <div class="d-md-none p-0">
       <div class="col-12">
-        <div class="sticky-bottom bg-light p-3 text-center shadow d-flex align-items-center justify-content-between">
-          <h3 class="mb-2">€ <%= @advert.price %> / night</h3>
-          <%= link_to "Reserve", new_advert_booking_path(@advert), class: "btn btn-success btn-lg btn-block" %>
+        <div class="sticky-bottom text-center">
+          <div class="d-flex align-items-center justify-content-between containerBooking">
+            <h3 class="mb-0">€ <%= @advert.price %> / night</h3>
+            <%= link_to "Reserve", new_advert_booking_path(@advert), class: "btn btn-success btn-lg btn-block" %>
+          </div>
         </div>
       </div>
     </div>

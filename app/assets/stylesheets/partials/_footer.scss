@@ -1,8 +1,15 @@
 footer {
   border-top: .5px solid gray;
   background-color: #edeaea;
+  position: relative;
+  // z-index: 2000;
 
   .copyright {
     font-size: 1.2rem;
+  }
+}
+@media (max-width: 767px) {
+  .footerMobileMargin {
+    padding-bottom: 7rem;
   }
 }

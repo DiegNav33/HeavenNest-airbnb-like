@@ -21,6 +21,12 @@
     }
   }
 
+  @media (max-width: 767px) {
+    .categoriesButton {
+      margin-right: 1.5rem;
+    }
+  }
+
   .active {
     color: #198753;
     border: none;

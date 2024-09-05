@@ -1,4 +1,4 @@
-<footer class="mt-auto">
+<footer class="mt-auto <%= 'footerMobileMargin' if current_page?(root_path) || current_page?(adverts_path) || (@advert.present? && @advert.id.present? && current_page?(advert_path(@advert))) %>">
   <div class="container py-4">
     <div class="row align-items-center justify-content-between text-center text-md-start">
       <!-- Section Réseaux Sociaux -->

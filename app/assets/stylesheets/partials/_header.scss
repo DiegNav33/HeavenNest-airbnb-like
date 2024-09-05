@@ -3,12 +3,40 @@ header {
   top: 0;
   z-index: 1000; /* Assurez-vous qu'il soit au-dessus des autres éléments */
   background-color: #fafafa;
-  // backdrop-filter: blur(8px); /* Effet de flou */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre pour distinction */
 }
 
 @media (max-width: 767px) {
   .hide-header-mobile {
     display: none; /* Cache le header */
+  }
+}
+
+@media (min-width: 767px) {
+  .header-mobile{
+    display: none; /* Cache le header */
+  }
+}
+
+.header-mobile {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: transparent;
+  box-shadow: none;
+
+  a {
+    padding: .5rem 1rem;
+    border-radius: 1rem;
+    background-color: rgba(250, 250, 250, 0.8);
+    display: flex;
+    border: .5px solid gray;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .fa-solid {
+    font-size: 1.6rem;
+    color: #198753;
   }
 }

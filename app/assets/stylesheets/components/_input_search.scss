@@ -25,3 +25,18 @@
     color: #198753;
   }
 }
+
+.searchNavMobile {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 0 3rem 3rem 3rem;
+  backdrop-filter: blur(1px); /* Applique un flou à l'arrière-plan */
+
+  #inputSearch {
+    border: 1px solid #198753 ;
+    border-radius: 2rem;
+    height: 45px;
+  }
+}

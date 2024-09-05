@@ -12,8 +12,10 @@ Rails.application.routes.draw do
   resources :adverts do
     resources :reviews, only: [:create]
     resources :bookings, only: [:new, :create]
+    resources :favourites, only: [:create]
   end
   resources :profiles, path: 'users/profile'
   resources :reviews, only: [:destroy]
-  resources :bookings, only: [:index, :destroy]
+  resources :bookings, only: [ :destroy]
+  resources :favourites, only: [:destroy]
 end
