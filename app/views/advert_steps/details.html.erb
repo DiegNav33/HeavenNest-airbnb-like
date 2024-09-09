@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="d-flex justify-content-center my-5">
+    <div class="card cardFormRadius" style="width: 500px;">
+      <div class="card-body">
+        <h2 class="card-title text-center">Advert Details - Additional Information</h2>
+        <%= simple_form_for @advert, url: wizard_path, method: :put do |f| %>
+          <%= f.input :max_guests, input_html: { class: 'form-control', min: 1 } %>
+          <%= f.input :min_nights, input_html: { class: 'form-control', min: 1 } %>
+          <%= f.input :bedrooms, input_html: { class: 'form-control', min: 1 } %>
+          <%= f.input :beds, input_html: { class: 'form-control', min: 1 } %>
+          <%= f.input :bathrooms, input_html: { class: 'form-control', min: 1 } %>
+          <% if step != :general %>
+            <%= f.button :submit, class: "btn btn-secondary btn-lg", name: "previous", value: "Previous" %>
+          <% end %>
+          <div class="form-actions text-center">
+            <%= f.button :submit, class: "btn btn-success btn-lg", name: "next" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

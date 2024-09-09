@@ -1,0 +1,30 @@
+.flash {
+  position: fixed;
+  top: 90px;
+  left: 0px;
+  margin: 0;
+  border: .5px solid gray;
+  border-radius: 0 2rem 2rem 0;
+  padding: .5rem 1rem;
+  font-size: 1.4rem;
+  z-index: 3000;
+  transform: translateX(-500px);
+  transition: 1s;
+  font-weight: bold;
+}
+
+.flash.show {
+  transform: translateX(0);
+}
+
+.alert {
+  background-color: rgb(179, 15, 15);
+  // background-color: rgba(179, 15, 15, 0.8);
+  color: #fff;
+}
+
+.notice {
+  background-color: #198753;
+  // background-color: rgba(25, 135, 83, 0.9);
+  color: #fff;
+}

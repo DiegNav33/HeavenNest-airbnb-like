@@ -1,0 +1,10 @@
+.linksDevise {
+  color: #198753;
+  text-decoration: none;
+  transition: .5s;
+
+  &:hover {
+    font-weight: bold;
+    text-decoration: underline
+  }
+}

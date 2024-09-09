@@ -6,7 +6,7 @@
       <% @adverts.each do |advert| %>
         <div class="col-12 col-md-6 col-lg-4 mb-0">
           <!-- Card component wrapped in link_to -->
-          <%= link_to advert_path(advert), class: "text-decoration-none", target: "_blank" do %>
+          <%= link_to advert_path(advert), class: "text-decoration-none anchor-card" do %>
             <div class="card shadow-sm mt-5 cardAdverts" style="height: 400px;">
               <!-- Card Header with Poster URL -->
               <div class="card-header p-0" style="height: 50%; overflow: hidden;">
@@ -33,13 +33,27 @@
               <!-- Card Footer with Price -->
               <div class="card-footer d-flex justify-content-between align-items-center" style="height: 15%;">
                 <p class="mb-0" id="priceAdvert">€ <%= advert.price %> / night</p>
-                <div class="d-flex align-items-center">
-                  <% if advert.user.profile_picture.present? %>
-                    <%= image_tag advert.user.profile_picture, alt: "Profile Picture" %>
-                  <% else %>
-                    <%= image_tag "logo.png", alt: "Profile Picture" %>
+                <div class="d-flex align-items-center position-relative" data-controller ="favourite">
+                  <% if user_signed_in? && current_user != advert.user %>
+                    <% if current_user.favourited?(advert) %>
+                      <% favourite = current_user.favourites.find_by(advert_id: advert.id) %>
+                      <%= button_to favourite_path(favourite), method: :delete, class: "btn favButton", data: { action: 'click->favourite#stopPropagation' }  do %>
+                        <i class="fa-solid fa-heart"></i>
+                      <% end %>
+                    <% else %>
+                      <%= button_to advert_favourites_path(advert), method: :post, class: "btn favButton", data: { action: 'click->favourite#stopPropagation' } do %>
+                        <i class="fa-regular fa-heart"></i>
+                      <% end %>
+                    <% end %>
                   <% end %>
-                  <p class="mb-0 ms-1" id="hostName"><%= advert.user.first_name %></p>
+                  <div class="d-flex align-items-center">
+                    <% if advert.user.profile_picture.present? %>
+                      <%= image_tag advert.user.profile_picture, alt: "Profile Picture" %>
+                    <% else %>
+                      <%= image_tag "logo.png", alt: "Profile Picture" %>
+                    <% end %>
+                    <p class="mb-0 ms-1" id="hostName"><%= advert.user.first_name %></p>
+                  </div>
                 </div>
               </div>
             </div>

@@ -2,6 +2,7 @@ class AdvertsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show]
 
   def index
+
     if params[:query].present?
       query = params[:query]
       @adverts = Advert.where("city ILIKE :query OR state ILIKE :query OR country ILIKE :query", query: "%#{query}%")
@@ -11,7 +12,6 @@ class AdvertsController < ApplicationController
 
     else
       @adverts = Advert.all
-
     end
   end
 
@@ -49,7 +49,7 @@ class AdvertsController < ApplicationController
   def update
     @advert = Advert.find(params[:id])
     if @advert.update(advert_params)
-      redirect_to advert_path(@advert), notice: "Advert successfully created", status: :see_other
+      redirect_to advert_path(@advert), notice: "Advert successfully modified", status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end

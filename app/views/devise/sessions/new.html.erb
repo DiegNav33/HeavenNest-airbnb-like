@@ -15,8 +15,11 @@
                         input_html: { autocomplete: "current-password" } %>
             <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
           </div>
+          <% if flash[:alert] && flash[:alert].include?("Invalid") %>
+            <p class="text-danger">Invalid Email or password.</p>
+          <% end %>
 
-          <div class="form-actions text-center">
+          <div class="form-actions text-center my-3">
             <%= f.button :submit, "Log in", class: "btn btn-success btn-lg" %>
           </div>
         <% end %>

@@ -12,4 +12,8 @@ class User < ApplicationRecord
 
   validates :first_name, presence: true
   validates :last_name, presence: true
+
+  def favourited?(advert)
+    favourites.exists?(advert_id: advert.id)
+  end
 end

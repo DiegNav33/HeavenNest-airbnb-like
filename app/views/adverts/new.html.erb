@@ -22,7 +22,7 @@
           <%= f.input :price, input_html: { class: 'form-control', min: 1 } %>
           <%= f.input :house_rules, placeholder: "eg: no smoking, no parties...", input_html: { class: 'form-control' } %>
           <%= f.input :description, placeholder: "Gorgeous house in beachfront...", input_html: { class: 'form-control' } %>
-          <%= f.input :images, as: :file, input_html: { class: 'form-control', multiple: true } %>
+          <%= f.input :images, as: :file, input_html: { class: 'form-control', multiple: true, data: {image_preview_target: "input", action: 'change->image-preview#preview'} } %>
           <div class="form-actions text-center">
             <%= f.button :submit, class: "btn btn-success btn-lg" %>
           </div>

@@ -10,7 +10,7 @@ class BookingsController < ApplicationController
     @booking = @advert.bookings.new(booking_params)
     @booking.user = current_user
     if @booking.save
-      redirect_to profile_path(current_user), status: :see_other
+      redirect_to profile_path(current_user), notice: "Booking successfully created", status: :see_other
     else
       render :new, status: :unprocessable_entity
     end
@@ -19,7 +19,7 @@ class BookingsController < ApplicationController
   def destroy
     @booking = Booking.find(params[:id])
     @booking.destroy
-    redirect_to profile_path(@booking.user), status: :see_other
+    redirect_to profile_path(@booking.user), notice: "Booking successfully deleted" status: :see_other
   end
 
   private

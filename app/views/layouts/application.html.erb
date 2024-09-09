@@ -12,13 +12,20 @@
     <%= javascript_include_tag "delete_confirmation_dialog" %>
   </head>
 
-  <body>
+  <body data-controller="flash-message">
+
+    <% unless request.fullpath == "/users/sign_in" %>
+      <% if flash[:notice].present? %>
+        <p class="notice flash" data-flash-message-target="flashNotice"><%= flash[:notice] %></p>
+      <% elsif flash[:alert].present? %>
+        <p class="alert flash" data-flash-message-target="flashAlert"><%= flash[:alert] %></p>
+      <% end %>
+    <% end %>
+
     <%= render "shared/header" %>
     <main>
       <%= yield %>
     </main>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
     <%= render "shared/footer" %>
   </body>
 </html>
