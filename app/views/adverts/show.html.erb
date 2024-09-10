@@ -1,5 +1,21 @@
 <div class="container advertShow">
-  <div class="row carouselContainer">
+  <div class="row carouselContainer position-relative">
+    <% if user_signed_in? && current_user != @advert.user %>
+      <% if current_user.favourited?(@advert) %>
+        <% favourite = current_user.favourites.find_by(advert_id: @advert.id) %>
+        <%= button_to favourite_path(favourite), method: :delete, class: "btn favButton showFavButton", data: { action: 'click->favourite#stopPropagation' }  do %>
+          <div class="favButtonContainer d-flex align-items-center justify-content-center">
+            <i class="fa-solid fa-heart"></i>
+          </div>
+        <% end %>
+      <% else %>
+        <%= button_to advert_favourites_path(@advert), method: :post, class: "btn favButton showFavButton", data: { action: 'click->favourite#stopPropagation' } do %>
+          <div class="favButtonContainer d-flex align-items-center justify-content-center">
+            <i class="fa-regular fa-heart"></i>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
     <!-- Colonne gauche : Carousel -->
     <div class="col-lg-8 p-0">
       <div id="advertCarousel" class="carousel slide" data-bs-ride="carousel">

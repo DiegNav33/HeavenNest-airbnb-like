@@ -244,7 +244,7 @@
                   <div class="d-flex align-items-center position-relative" data-controller ="favourite">
                       <% if current_user.favourited?(favourite.advert) %>
                         <% favourite = current_user.favourites.find_by(advert_id: favourite.advert.id) %>
-                        <%= button_to favourite_path(favourite), method: :delete, class: "btn favButton", form_class: 'delete-alertbox', data: { action: 'click->favourite#stopPropagation' }  do %>
+                        <%= button_to favourite_path(favourite), method: :delete, class: "btn favButton", data: { action: 'click->favourite#stopPropagation' }  do %>
                           <i class="fa-solid fa-heart"></i>
                         <% end %>
                       <% else %>

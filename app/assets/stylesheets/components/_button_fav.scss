@@ -8,3 +8,25 @@
     color: red;
   }
 }
+
+.favButtonContainer {
+  border: 1px solid #fff;
+  border-radius: 50%;
+  background-color: #fff;
+  width: 30px;
+  height: 30px;
+
+  @media (min-width: 768px) {
+    width: 40px;
+    height: 40px;
+  }
+
+}
+
+.showFavButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 500;
+  padding: 0;
+}

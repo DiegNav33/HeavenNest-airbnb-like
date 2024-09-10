@@ -73,7 +73,9 @@
 <% if request.path.include?('/adverts/') || request.path.include?('/bookings/new') %>
   <header class="header-mobile">
     <%= link_to request.referer || root_path, class: "btn btn-outline-secondary" do %>
-      <i class="fa-solid fa-arrow-left"></i>
+      <div class="backButtonContainer d-flex align-items-center justify-content-center">
+        <i class="fa-solid fa-arrow-left"></i>
+      </div>
     <% end %>
   </header>
 <% end %>
