@@ -44,13 +44,13 @@ window.addEventListener('turbo:load', () => {
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.isConfirmed) {
-          // Afficher la confirmation
+          // Show confirmation
           Swal.fire({
             title: "Deleted!",
             text: "It has been deleted.",
             icon: "success"
           }).then(() => {
-            // Soumettre le formulaire après avoir cliqué sur "OK" dans la confirmation
+            // Submit form after click on ok
             event.target.submit();
           });
         }

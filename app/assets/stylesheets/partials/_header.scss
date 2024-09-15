@@ -6,16 +6,14 @@ header {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre pour distinction */
 }
 
-@media (max-width: 767px) {
-  .hide-header-mobile {
-    display: none; /* Cache le header */
-  }
+.logo {
+  width: 40px;
 }
 
-@media (min-width: 767px) {
-  .header-mobile{
-    display: none; /* Cache le header */
-  }
+.navbar-nav {
+
+  flex-direction: row;
+
 }
 
 .header-mobile {
@@ -24,6 +22,10 @@ header {
   left: 10px;
   background: transparent;
   box-shadow: none;
+
+  a {
+    background-color: none;
+  }
 
   .backButtonContainer {
     border: 1px solid #fff;
@@ -40,5 +42,25 @@ header {
   .fa-solid {
     font-size: 1.8rem;
     color: #333;
+  }
+}
+
+
+@media (max-width: 767px) {
+  .hide-header-mobile {
+    display: none; /* Cache le header */
+  }
+}
+
+@media (min-width: 767px) {
+  .header-mobile{
+    display: none; /* Cache le header */
+  }
+}
+
+@media (min-width: 993px) {
+
+  .logo {
+    width: 50px;
   }
 }

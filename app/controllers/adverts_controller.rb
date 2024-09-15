@@ -64,6 +64,6 @@ class AdvertsController < ApplicationController
   private
 
   def advert_params
-    params.require(:advert).permit(:title, :description, :price, :max_guests, :min_nights, :bedrooms, :beds, :bathrooms, :check_in, :check_out, :house_rules, :address, :city, :state, :postal_code, :country, :category_id, amenity_ids: [], images: [])
+    params.require(:advert).permit(:title, :description, :price, :max_guests, :min_nights, :bedrooms, :beds, :bathrooms, :check_in, :check_out, :smoking, :party, :address, :city, :state, :postal_code, :country, :category_id, amenity_ids: [], images: [])
   end
 end

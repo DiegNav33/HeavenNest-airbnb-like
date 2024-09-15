@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_01_132412) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_15_030118) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -62,7 +62,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_01_132412) do
     t.integer "bathrooms"
     t.time "check_in"
     t.time "check_out"
-    t.text "house_rules"
     t.string "address"
     t.string "city"
     t.string "state"
@@ -72,6 +71,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_01_132412) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
+    t.boolean "smoking"
+    t.boolean "party"
     t.index ["category_id"], name: "index_adverts_on_category_id"
     t.index ["user_id"], name: "index_adverts_on_user_id"
   end

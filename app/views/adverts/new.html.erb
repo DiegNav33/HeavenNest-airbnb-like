@@ -4,13 +4,13 @@
       <div class="card-body">
         <h2 class="card-title text-center">New advert</h2>
         <%= simple_form_for @advert do |f|%>
-          <%= f.input :category_id, collection: Category.all, label_method: :name, value_method: :id, prompt: "Select a category" %>
+          <%= f.input :category_id, collection: Category.all, label_method: :name, value_method: :id, prompt: "-- Select a category --" %>
           <%= f.input :title, placeholder: "Gorgeous house in beachfront...", input_html: { class: 'form-control' } %>
           <%= f.input :address, placeholder: "123 Georges st...", input_html: { class: 'form-control' } %>
           <%= f.input :city, placeholder: "Fort Lauderdale...", input_html: { class: 'form-control' } %>
           <%= f.input :state, label: "State/Region", placeholder: "Florida...", input_html: { class: 'form-control' } %>
           <%= f.input :postal_code, placeholder: "33301...", input_html: { class: 'form-control' } %>
-          <%= f.input :country, as: :country, prompt: "Select your country...", input_html: { class: 'form-control' } %>
+          <%= f.input :country, as: :country, prompt: "-- Select a country --", input_html: { class: 'form-control' } %>
           <%= f.input :max_guests, input_html: { class: 'form-control', min: 1 } %>
           <%= f.input :min_nights, input_html: { class: 'form-control', min: 1 } %>
           <%= f.input :bedrooms, input_html: { class: 'form-control', min: 1 } %>
@@ -19,8 +19,9 @@
           <%= f.input :amenity_ids, label: "Amenities", as: :check_boxes, collection: Amenity.all, label_method: :name, value_method: :id, input_html: { class: 'form-control' } %>
           <%= f.input :check_in, placeholder: "Gorgeous house in beachfront...", input_html: { class: 'form-control' } %>
           <%= f.input :check_out, placeholder: "Gorgeous house in beachfront...", input_html: { class: 'form-control' } %>
+          <%= f.input :smoking, as: :select, collection: [["Yes", true], ["No", false]], label: "Smoking allowed?", prompt: "-- Select an option --", input_html: { class: 'form-control' } %>
+          <%= f.input :party, as: :select, collection: [["Yes", true], ["No", false]], label: "Parties allowed?", prompt: "-- Select an option --", input_html: { class: 'form-control' } %>
           <%= f.input :price, input_html: { class: 'form-control', min: 1 } %>
-          <%= f.input :house_rules, placeholder: "eg: no smoking, no parties...", input_html: { class: 'form-control' } %>
           <%= f.input :description, placeholder: "Gorgeous house in beachfront...", input_html: { class: 'form-control' } %>
           <%= f.input :images, as: :file, input_html: { class: 'form-control', multiple: true, data: {image_preview_target: "input", action: 'change->image-preview#preview'} } %>
           <div class="form-actions text-center">
