@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="d-flex justify-content-center newAdvertContainer">
+    <div class="card cardFormRadius" style="width: 500px;">
+      <div class="card-header">
+        <h2 class="text-center my-3">Edit Advert</h2>
+      </div>
+      <div class="card-body">
+        <%= simple_form_for @advert do |f|%>
+          <div class="group">
+            <%= f.input :category_id, collection: Category.all, label_method: :name, value_method: :id, prompt: "-- Select a category --" %>
+            <%= f.input :title, placeholder: "Gorgeous house in beachfront...", input_html: { class: 'form-control' } %>
+          </div>
+          <div class="group">
+            <%= f.input :address, placeholder: "123 Georges st...", input_html: { class: 'form-control' } %>
+            <%= f.input :city, placeholder: "Fort Lauderdale...", input_html: { class: 'form-control' } %>
+          </div>
+          <div class="group elt3">
+            <%= f.input :state, label: "State/Region", placeholder: "Florida...", input_html: { class: 'form-control' } %>
+            <%= f.input :postal_code, placeholder: "33301...", input_html: { class: 'form-control' } %>
+            <%= f.input :country, as: :country, prompt: "-- Select a country --", input_html: { class: 'form-control' } %>
+          </div>
+          <hr>
+          <div class="group elt3">
+            <%= f.input :price, input_html: { class: 'form-control', min: 1 } %>
+            <%= f.input :max_guests, input_html: { class: 'form-control', min: 1 } %>
+            <%= f.input :min_nights, input_html: { class: 'form-control', min: 1 } %>
+          </div>
+          <div class="group elt3">
+            <%= f.input :bedrooms, input_html: { class: 'form-control', min: 1 } %>
+            <%= f.input :beds, input_html: { class: 'form-control', min: 1 } %>
+            <%= f.input :bathrooms, input_html: { class: 'form-control', min: 1 } %>
+          </div>
+          <hr>
+          <div class="form-group">
+            <label>Amenities <span>*</span></label>
+            <%= f.input :amenity_ids, as: :check_boxes, collection: Amenity.all, label_method: :name, value_method: :id, input_html: { class: 'form-control' }%>
+          </div>
+          <hr>
+          <div class="group">
+            <%= f.input :check_in, placeholder: "Gorgeous house in beachfront...", input_html: { class: 'form-control' } %>
+            <%= f.input :check_out, placeholder: "Gorgeous house in beachfront...", input_html: { class: 'form-control' } %>
+          </div>
+          <hr>
+          <div class="group">
+            <%= f.input :smoking, as: :select, collection: [["Yes", true], ["No", false]], label: "Smoking allowed? *", prompt: "-- Select an option --", input_html: { class: 'form-control' } %>
+            <%= f.input :party, as: :select, collection: [["Yes", true], ["No", false]], label: "Parties allowed? *", prompt: "-- Select an option --", input_html: { class: 'form-control' } %>
+          </div>
+          <hr>
+          <div class="group elt1">
+            <%= f.input :description, placeholder: "Gorgeous house in beachfront...", input_html: { class: 'form-control' } %>
+          </div>
+          <hr>
+          <div class="group elt1">
+            <%= f.input :images, as: :file, input_html: { class: 'form-control', multiple: true, data: {image_preview_target: "input", action: 'change->image-preview#preview'} } %>
+          </div>
+          <div class="form-actions text-center mt-4 mb-2">
+            <%= f.button :submit, class: "btn btn-success btn-lg" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

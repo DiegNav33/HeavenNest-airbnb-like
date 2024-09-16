@@ -1,0 +1,88 @@
+.newAdvertContainer {
+  margin: 5rem 0 0 0;
+
+  .card-header {
+    border-radius: 2rem 2rem 0 0;
+  }
+}
+
+.form-check {
+  margin: 0;
+}
+
+.advert_amenity_ids {
+  height: 150px;
+  overflow-y: auto;
+
+  legend {
+    display: none;
+  }
+
+}
+
+
+@media (min-width: 768px) {
+  .newAdvertContainer {
+    margin: 3rem 0;
+  }
+
+  .group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    div {
+      width: 48%;
+    }
+
+    .invalid-feedback {
+      width: 100%;
+      font-size: .9rem;
+    }
+  }
+
+  .elt3 {
+    div {
+      width: 30%;
+    }
+  }
+
+  .elt1 {
+    display: block;
+    div {
+      width: 100%;
+    }
+  }
+
+  .advert_check_in, .advert_check_out {
+    div {
+      width: 100%;
+    }
+  }
+
+
+  .advert_amenity_ids {
+    height: 150px;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .form-check {
+    // padding: 0;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+
+    &:nth-child(even) {
+      // flex-direction: row-reverse;
+      justify-content: start;
+
+      // label {
+      //   margin-right: 2.5rem;
+      // }
+    }
+  }
+
+}
