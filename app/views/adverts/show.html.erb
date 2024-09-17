@@ -74,7 +74,7 @@
         <div>
           <h1><%= @advert.title %></h1>
           <h3><%= @advert.city %>, <%= @advert.state %>, <%= @advert.country %></h3>
-          <p class="m-0"><%= pluralize(@advert.max_guests, 'traveller') %> | <%= pluralize(@advert.bedrooms, 'bedroom') %> | <%= pluralize(@advert.beds, 'bed') %> | <%= pluralize(@advert.bathrooms, 'bathroom') %> </p>
+          <p class="m-0">Up to <%= pluralize(@advert.max_guests, 'traveller') %> | <%= pluralize(@advert.bedrooms, 'bedroom') %> | <%= pluralize(@advert.beds, 'bed') %> | <%= pluralize(@advert.bathrooms, 'bathroom') %> </p>
           <p class="m-0">Category: <%= @advert.category.name %></p>
           <div class="d-flex">
             <p class="m-0"><%= pluralize(@advert.reviews.count, 'review') %></p>
@@ -128,10 +128,10 @@
           <h2 class="borderHeadersProfile">Things to know</h2>
           <div class="advertRules">
             <div class="d-flex flex-wrap justify-content-between">
-              <p class="m-0">Check-in: <%= @advert.check_in.strftime("%H:%M") %></p>
-              <p class="m-0">Check-out: <%= @advert.check_out.strftime("%H:%M") %></p>
-              <p class="m-0"> <%= pluralize( @advert.min_nights, "night") %> minimum</p>
-              <p class="m-0"> <%= pluralize( @advert.max_guests, "guest") %> maximum</p>
+              <p class="m-0 mb-2">Check-in: <%= @advert.check_in.strftime("%H:%M") %></p>
+              <p class="m-0 mb-2">Check-out: <%= @advert.check_out.strftime("%H:%M") %></p>
+              <p class="m-0">Smoking: <%= @advert.smoking == true ? "Yes" : "No"%> </p>
+              <p class="m-0">Party: <%= @advert.party == true ? "Yes" : "No" %> </p>
             </div>
           </div>
         </div>

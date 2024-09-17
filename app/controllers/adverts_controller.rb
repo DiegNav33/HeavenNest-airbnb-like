@@ -49,7 +49,7 @@ class AdvertsController < ApplicationController
   def update
     @advert = Advert.find(params[:id])
     if @advert.update(advert_params)
-      redirect_to advert_path(@advert), notice: "Advert successfully modified", status: :see_other
+      redirect_to advert_path(@advert), notice: "Advert successfully updated", status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end

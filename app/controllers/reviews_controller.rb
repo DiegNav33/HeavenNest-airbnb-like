@@ -6,7 +6,7 @@ class ReviewsController < ApplicationController
     @review.user = current_user
 
     if @review.save
-      redirect_to advert_path(@advert), notice: "Review added successfully.", status: :see_other
+      redirect_to advert_path(@advert), notice: "Review successfully added .", status: :see_other
     else
       render 'adverts/show', status: :unprocessable_entity
     end

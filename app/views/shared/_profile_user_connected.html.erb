@@ -1,0 +1,118 @@
+<hr class="my-5">
+<h2 class="borderHeadersProfile"><%= @user.first_name %>'s bookings (<%= @user.bookings.count %>)</h2>
+<% if @user.bookings.blank? %>
+  <p class="text-center mt-4"><strong><%= @user.first_name %> has not made any bookings yet.</strong></p>
+<% else %>
+  <div class="d-flex justify-content-<%=@user.adverts.count <= 2 ? 'start' : 'between'%>" id="containerListingProfile">
+    <% @user.bookings.each do |booking| %>
+      <div class="col-12 col-md-6 col-lg-4 mb-0">
+        <!-- Card component wrapped in link_to -->
+        <div class="card shadow-sm mt-5 me-3 cardAdverts cardProfile position-relative" style="height: 400px;">
+          <!-- Card Header with Poster URL -->
+          <div class="card-header p-0" style="height: 50%; overflow: hidden;">
+            <% if booking.advert.images.present? %>
+              <%= image_tag booking.advert.images.first, alt: "alttext", style: "height: 100%; width:100%; object-fit: cover;" %>
+            <% else %>
+              <%= image_tag "test.jpg", alt: "alttext", style: "height: 100%; width:100%; object-fit: cover;" %>
+            <% end %>
+          </div>
+
+          <!-- Card Body with Title, Rating, and Overview -->
+          <div class="card-body position-relative" style="height: 35%; overflow: auto;">
+            <h4 class="card-title m-0 mb-1"><strong><%= booking.start_date.strftime("%d/%m/%y") %> - <%= booking.end_date.strftime("%d/%m/%y") %></strong></h4>
+            <p class="m-0"><em><%= booking.advert.city %>, <%= booking.advert.country %></em></p>
+            <div class="d-flex flex-wrap align-items-center justify-content-evenly mt-4 detailsAdvert">
+              <p class="mb-0"><i class="fa-solid fa-users me-3"></i><%= booking.advert.max_guests %></p>
+              <p class="mb-0"><i class="fa-solid fa-bed me-3"></i><%= booking.advert.bedrooms %></p>
+              <p class="mb-0"><i class="fa-solid fa-bath me-3"></i><%= booking.advert.bathrooms %></p>
+            </div>
+          </div>
+
+          <!-- Card Footer with Price -->
+          <div class="card-footer d-flex justify-content-between align-items-center" style="height: 15%;">
+            <p class="mb-0" id="priceAdvert">€ <%= number_with_precision(booking.total_price, precision: (booking.total_price % 1 == 0 ? 0 : 2)) %> / <%= pluralize(booking.nights_count, "night")%></p>
+            <div>
+              <%= link_to advert_path(booking.advert), class: "btn btn-outline-success", id:"editButton" do %>
+                <i class="fa-solid fa-eye"></i>
+              <% end %>
+
+              <% if booking.start_date > Date.today %>
+                <%= button_to booking_path(booking), method: :delete, form_class: 'delete-alertbox', class: "btn btn-outline-danger", id:"editButton" do %>
+                  <i class="fa-solid fa-trash-can"></i>
+                <% end %>
+              <% elsif booking.start_date <= Date.today && booking.end_date >= Date.today %>
+                <div class="btn btn-outline-secondary" data-bs-toggle="tooltip" title="Your stay has started, enjoy! (<%= booking.start_date.strftime("%d/%m/%y") %> - <%= booking.end_date.strftime("%d/%m/%y") %>)">
+                  <i class="fa-solid fa-spinner spin"></i>
+                </div>
+              <% else %>
+                <%= link_to "#{advert_path(booking.advert)}#review-form", class: "text-decoration-none btn btn-outline-secondary", data: {bs_toggle: "tooltip"}, title: "Write a comment!" do %>
+                  <i class="fa-solid fa-comment-medical"></i>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<% if @user.favourites.present? %>
+  <hr class="my-5">
+  <h2 class="borderHeadersProfile"><%= @user.first_name %>'s favourites (<%= @user.favourites.count %>)</h2>
+  <div class="d-flex justify-content-<%=@user.favourites.count <= 2 ? 'start' : 'between'%>" id="containerListingProfile">
+    <% @user.favourites.each do |favourite| %>
+      <div class="col-12 col-md-6 col-lg-4 mb-0">
+        <!-- Card component wrapped in link_to -->
+        <%= link_to advert_path(favourite.advert), class: "text-decoration-none" do %>
+          <div class="card shadow-sm mt-5 me-3 cardAdverts cardProfile position-relative" style="height: 400px;">
+            <!-- Card Header with Poster URL -->
+            <div class="card-header p-0" style="height: 50%; overflow: hidden;">
+              <% if favourite.advert.images.present? %>
+                <%= image_tag favourite.advert.images.first, alt: "alttext", style: "height: 100%; width:100%; object-fit: cover;" %>
+              <% else %>
+                <%= image_tag "test.jpg", alt: "alttext", style: "height: 100%; width:100%; object-fit: cover;" %>
+              <% end %>
+            </div>
+
+            <!-- Card Body with Title, Rating, and Overview -->
+            <div class="card-body position-relative" style="height: 35%; overflow: auto;">
+              <h4 class="card-title m-0 mb-1"><strong><%= favourite.advert.title %></strong></h4>
+              <p class="m-0"><em><%= favourite.advert.city %>, <%= favourite.advert.country %></em></p>
+              <div class="d-flex flex-wrap align-items-center justify-content-evenly mt-4 detailsAdvert">
+                <p class="mb-0"><i class="fa-solid fa-users me-3"></i><%= favourite.advert.max_guests %></p>
+                <p class="mb-0"><i class="fa-solid fa-bed me-3"></i><%= favourite.advert.bedrooms %></p>
+                <p class="mb-0"><i class="fa-solid fa-bath me-3"></i><%= favourite.advert.bathrooms %></p>
+              </div>
+            </div>
+
+            <!-- Card Footer with Price -->
+            <div class="card-footer d-flex justify-content-between align-items-center" style="height: 15%;">
+              <p class="mb-0" id="priceAdvert">€ <%= favourite.advert.price %> / night</p>
+              <div class="d-flex align-items-center position-relative" data-controller ="favourite">
+                  <% if current_user.favourited?(favourite.advert) %>
+                    <% favourite = current_user.favourites.find_by(advert_id: favourite.advert.id) %>
+                    <%= button_to favourite_path(favourite), method: :delete, class: "btn favButton", data: { action: 'click->favourite#stopPropagation' }  do %>
+                      <i class="fa-solid fa-heart"></i>
+                    <% end %>
+                  <% else %>
+                    <%= button_to advert_favourites_path(advert), method: :post, class: "btn favButton", data: { action: 'click->favourite#stopPropagation' } do %>
+                      <i class="fa-regular fa-heart"></i>
+                    <% end %>
+                  <% end %>
+                <div class="d-flex align-items-center">
+                  <% if favourite.advert.user.profile_picture.present? %>
+                    <%= image_tag favourite.advert.user.profile_picture, alt: "Profile Picture" %>
+                  <% else %>
+                    <%= image_tag "logo.png", alt: "Profile Picture" %>
+                  <% end %>
+                  <p class="mb-0 ms-1" id="hostName"><%= favourite.advert.user.first_name %></p>
+                </div>
+            </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
