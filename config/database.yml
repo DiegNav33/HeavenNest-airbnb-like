@@ -79,6 +79,6 @@ test:
 #
 production:
   <<: *default
-  database: airbnb_like_production
-  username: airbnb_like
+  database: heavennest_production
+  username: heavennest_production_user
   password: <%= ENV["AIRBNB_LIKE_DATABASE_PASSWORD"] %>
