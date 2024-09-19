@@ -14,7 +14,7 @@ Amenity.destroy_all
 puts "Database cleaned"
 # Categories
 categories = ['Apartment', 'House', 'Villa', 'Studio', 'Room',
-              'Loft', 'Bungalow', 'Chalet', 'Mansion', 'Cottage']
+              'Unusual', 'Bungalow', 'Chalet', 'Mansion', 'Farm']
 
 categories.each do |category_name|
   category = Category.new(name: category_name)
