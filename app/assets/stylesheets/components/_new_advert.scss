@@ -4,6 +4,10 @@
   .card-header {
     border-radius: 2rem 2rem 0 0;
   }
+
+  small {
+    font-size: 1rem;
+  }
 }
 
 .form-check {
@@ -69,19 +73,13 @@
   }
 
   .form-check {
-    // padding: 0;
     width: 50%;
     display: flex;
     align-items: center;
     justify-content: start;
 
     &:nth-child(even) {
-      // flex-direction: row-reverse;
       justify-content: start;
-
-      // label {
-      //   margin-right: 2.5rem;
-      // }
     }
   }
 

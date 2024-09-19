@@ -48,6 +48,14 @@ class AdvertsController < ApplicationController
 
   def update
     @advert = Advert.find(params[:id])
+
+    #Keep the existing images et add the new ones if exists
+    if params[:advert][:images].present?
+      @advert.images.attach(params[:advert][:images]) #Add new images
+    end
+
+    #Delete all the images in the params hash to avoid the reboot  of it
+    params[:advert].delete(:images)
     if @advert.update(advert_params)
       redirect_to advert_path(@advert), notice: "Advert successfully updated", status: :see_other
     else

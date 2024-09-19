@@ -9,7 +9,7 @@
         <% end %>
       </div>
       <div class="card-body">
-        <%= simple_form_for @advert, html: { data: { controller: "character-count", character_number: 150}} do |f|%>
+        <%= simple_form_for @advert, html: { data: { controller: "character-count", character_min: 150, character_max: 1000}} do |f|%>
           <div class="group">
             <%= f.input :category_id, collection: Category.all, label_method: :name, value_method: :id, prompt: "-- Select a category --" %>
             <%= f.input :title, placeholder: "Gorgeous house in beachfront...", input_html: { class: 'form-control' } %>
